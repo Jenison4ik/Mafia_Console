@@ -1,4 +1,5 @@
 import calendar
+from datetime import date
 
 from mafia.models import Evening
 
