@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Сводка вечера</title>
+  <style>
+    body { font-family: DejaVu Sans, sans-serif; font-size: 11pt; color: #111; }
+    h1 { font-size: 16pt; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #333; padding: 4px 6px; }
+    th { background: #eee; }
+    .block { margin-top: 16px; page-break-inside: avoid; }
+  </style>
+</head>
+<body>
+  <h1>Сводка: {{ evening_title }}</h1>
+  <div>Дата: {{ evening.event_date|date:"d.m.Y" }}</div>
+  <div>Тип: {{ evening.get_event_type_display }}</div>
+  <div>Цена за игру: {{ evening.effective_price }} ₽</div>
+
+  <div class="block">
+    <strong>Игроки вечера</strong>
+    <table>
+      <tr><th>Ник</th><th>Игр</th><th>К оплате</th></tr>
+      {% for ep in evening.evening_players.all %}
+      <tr>
+        <td>{{ ep.player.nickname }}</td>
+        <td>{{ ep.games_played }}</td>
+        <td>{{ ep.paid_amount }} ₽</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  {% for session in sessions %}
+  <div class="block">
+    <h2>Игра {{ session.game.game_number }}, стол {{ session.table.name }}</h2>
+    <p>Стадия: {{ session.get_stage_display }}</p>
+    <table>
+      <tr><th>Место</th><th>Ник</th><th>Фолы</th><th>Баллы</th><th>Роль</th></tr>
+      {% for p in session.players.all %}
+      <tr>
+        <td>{{ p.seat_number }}</td>
+        <td>{{ p.player.nickname }}</td>
+        <td>{{ p.fouls }}</td>
+        <td>{{ p.points }}</td>
+        <td>{{ p.get_role_display }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endfor %}
+</body>
+</html>

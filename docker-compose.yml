@@ -1,0 +1,26 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    volumes:
+      - sqlite_data:/data
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
+      - DATABASE_PATH=/data/db.sqlite3
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-change-in-production}
+      - DEBUG=${DEBUG:-1}
+    expose:
+      - "8000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+
+volumes:
+  sqlite_data:

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Бланк игры</title>
+  <style>
+    body { font-family: DejaVu Sans, sans-serif; font-size: 11pt; color: #111; }
+    h1 { font-size: 16pt; margin-bottom: 4px; }
+    .meta { margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #333; padding: 4px 6px; text-align: left; }
+    th { background: #eee; }
+    .section { margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <h1>Бланк игры</h1>
+  <div class="meta">
+    <div><strong>{{ evening_title }}</strong></div>
+    <div>Дата: {{ evening.event_date|date:"d.m.Y" }}</div>
+    <div>Стол: {{ session.table.name }}</div>
+    <div>Игра № {{ session.game.game_number }}</div>
+    <div>Стадия: {{ session.get_stage_display }}</div>
+    {% if session.leader %}<div>Ведущий: {{ session.leader.nickname }}</div>{% endif %}
+  </div>
+  <div class="section">
+    <strong>Игроки</strong>
+    <table>
+      <tr>
+        <th>Место</th><th>Ник</th><th>Фолы</th><th>Баллы</th><th>Доп.</th><th>Роль</th>
+      </tr>
+      {% for p in session.players.all %}
+      <tr>
+        <td>{{ p.seat_number }}</td>
+        <td>{{ p.player.nickname }}</td>
+        <td>{{ p.fouls }}</td>
+        <td>{{ p.points }}</td>
+        <td>{{ p.extra_points }}</td>
+        <td>{{ p.get_role_display }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <div class="section">
+    <strong>Голосования</strong>
+    {% for v in session.voting_rounds.all %}
+    <div>Раунд {{ v.index }} ({{ v.get_kind_display }}): номинации {{ v.nominations }} голоса {{ v.votes }} {% if v.is_tie %}[ничья]{% endif %}</div>
+    {% empty %}<div>—</div>{% endfor %}
+  </div>
+  <div class="section">
+    <strong>Стрельба</strong>
+    {% for s in session.shooting_rounds.all %}
+    <div>Раунд {{ s.index }}: цель {{ s.target_seat|default:"—" }} {% if s.is_miss %}[промах]{% endif %}</div>
+    {% empty %}<div>—</div>{% endfor %}
+  </div>
+  <div class="section">
+    <strong>Итог</strong>: {{ session.winner|default:"—" }}<br>
+    <strong>Протесты</strong>: {{ session.protests|default:"—"|linebreaksbr }}
+  </div>
+</body>
+</html>
