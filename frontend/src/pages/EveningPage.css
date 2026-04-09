@@ -1,0 +1,152 @@
+.evening-hub-header {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.evening-hub-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.evening-section-title {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.evening-section-title-spaced {
+  margin-top: 8px;
+}
+
+.evening-nav-btn {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.evening-archive-section {
+  margin-top: 20px;
+}
+
+.evening-archive-card {
+  margin-top: 10px;
+}
+
+.evening-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  padding: 12px;
+}
+
+.evening-modal-overlay-bottom {
+  background: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.evening-modal-overlay-center {
+  background: rgba(0, 0, 0, 0.65);
+  align-items: center;
+  justify-content: center;
+}
+
+.evening-modal-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.evening-modal-title {
+  margin: 0;
+}
+
+.evening-error {
+  color: var(--danger);
+}
+
+.evening-row-end {
+  justify-content: flex-end;
+}
+
+.evening-detail-header {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.evening-back-link {
+  font-size: 0.85rem;
+}
+
+.evening-detail-title {
+  font-size: 1.25rem;
+  margin: 6px 0 0;
+}
+
+.evening-detail-subtitle {
+  margin: 0;
+}
+
+.evening-players-section {
+  margin-top: 14px;
+}
+
+.evening-row-between {
+  justify-content: space-between;
+}
+
+.evening-start-game-section {
+  margin-top: 12px;
+}
+
+.evening-table-label {
+  gap: 6px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.evening-stats-section {
+  margin-top: 12px;
+}
+
+.evening-full-width {
+  width: 100%;
+}
+
+.evening-stats-card {
+  margin-top: 8px;
+}
+
+.evening-no-margin {
+  margin: 0;
+}
+
+.evening-session-links {
+  margin-top: 16px;
+  gap: 8px;
+}
+
+.evening-fab-card {
+  min-width: 200px;
+}
+
+.evening-fab-link {
+  text-align: center;
+  text-decoration: none;
+}
+
+.evening-add-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 90;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.evening-add-card {
+  width: 100%;
+  max-width: 480px;
+}

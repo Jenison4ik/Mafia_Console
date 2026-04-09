@@ -1,0 +1,52 @@
+.game-session-shell {
+  max-width: 800px;
+  padding-top: 0;
+}
+
+.game-session-header {
+  margin-top: 8px;
+}
+
+.game-session-back-link {
+  font-size: 0.85rem;
+}
+
+.game-session-title {
+  font-size: 1.1rem;
+  margin: 6px 0 0;
+}
+
+.game-session-subtitle {
+  margin: 0;
+}
+
+.game-session-error {
+  color: var(--danger);
+  margin: 8px 0;
+}
+
+.game-session-section-first {
+  margin-top: 10px;
+}
+
+.game-session-section {
+  margin-top: 12px;
+}
+
+.game-session-table-wrap {
+  overflow-x: auto;
+}
+
+.game-session-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.game-session-seat-input {
+  max-width: 80px;
+}
+
+.game-session-export {
+  margin-top: 16px;
+}
