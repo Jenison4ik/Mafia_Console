@@ -48,7 +48,10 @@ function EveningHub() {
   }, [])
 
   useEffect(() => {
-    void load()
+    const t = setTimeout(() => {
+      void load()
+    }, 0)
+    return () => clearTimeout(t)
   }, [load])
 
   async function searchArchive() {
@@ -253,14 +256,14 @@ function EveningDetail({ eveningId }: { eveningId: number }) {
   }, [eveningId])
 
   useEffect(() => {
-    void load()
+    const t = setTimeout(() => {
+      void load()
+    }, 0)
+    return () => clearTimeout(t)
   }, [load])
 
   useEffect(() => {
-    if (!playerQ.trim()) {
-      setSearchHits([])
-      return
-    }
+    if (!playerQ.trim()) return
     const t = setTimeout(() => {
       void (async () => {
         try {
@@ -452,7 +455,7 @@ function EveningDetail({ eveningId }: { eveningId: number }) {
               />
             </label>
             <div className="stack">
-              {searchHits.map((h) => (
+              {(playerQ.trim() ? searchHits : []).map((h) => (
                 <button key={h.id} type="button" className="btn" onClick={() => void addPlayer(h.id)}>
                   {h.nickname}
                 </button>

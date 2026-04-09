@@ -89,6 +89,17 @@ export default function GameSessionPage() {
   const load = useCallback(async () => {
     const data = await apiJson<Session>(`/sessions/${id}/`);
     setS(data);
+    setProtestsLocal(data.protests);
+    if (data.stage === "prep" && data.players.length) {
+      setPrepSeats((prev) =>
+        prev.length
+          ? prev
+          : data.players.map((p) => ({
+              player_id: p.player,
+              seat_number: p.seat_number,
+            })),
+      );
+    }
     const incomplete = data.voting_rounds
       .filter((v) => !v.completed)
       .sort((a, b) => a.index - b.index)[0];
@@ -105,25 +116,11 @@ export default function GameSessionPage() {
   }, [id]);
 
   useEffect(() => {
-    void load().catch((e) => setErr(String(e)));
+    const t = setTimeout(() => {
+      void load().catch((e) => setErr(String(e)));
+    }, 0);
+    return () => clearTimeout(t);
   }, [load]);
-
-  useEffect(() => {
-    if (s?.protests !== undefined) setProtestsLocal(s.protests);
-  }, [s?.protests]);
-
-  useEffect(() => {
-    if (!s || s.stage !== "prep") return;
-    if (prepSeats.length) return;
-    if (s.players.length) {
-      setPrepSeats(
-        s.players.map((p) => ({
-          player_id: p.player,
-          seat_number: p.seat_number,
-        })),
-      );
-    }
-  }, [s, prepSeats.length]);
 
   useEffect(() => {
     if (!s || s.stage !== "prep" || !s.evening_id) return;
